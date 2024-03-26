@@ -2,7 +2,7 @@ import path from "node:path";
 
 import {
   getVideoResolution,
-  getVideoDurationMs,
+  getVideoDurationSec,
   scaleVideo,
   saveVideoFrame,
   ScaleVideoOptions,
@@ -140,7 +140,7 @@ interface VideoInfo {
 async function getVideoInfo(videoPath: string): Promise<VideoInfo> {
   const resolution = await getVideoResolution(videoPath);
   const { width, height } = parseVideoResolution(resolution);
-  const duration = await getVideoDurationMs(videoPath);
+  const duration = await getVideoDurationSec(videoPath);
 
   return { resolution, width, height, duration };
 }
