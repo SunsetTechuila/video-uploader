@@ -118,7 +118,7 @@ async function uploadVideo(options: UploadVideoOptions) {
 
   console.info(`Uploading video with resolution ${resolution} to Telegram`);
   await telegramUploader
-    .uploadVideo(video, { thumbnail, message: `${videoName} ${resolution}` })
+    .uploadVideo(video, { thumbnail, caption: `${videoName} ${resolution}` })
     .then(() => {
       console.info(`Video with resolution ${resolution} uploaded to Telegram`);
     });

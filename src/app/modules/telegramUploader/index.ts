@@ -16,7 +16,7 @@ export interface SendableVideo {
 
 export interface UploadVideoOptions {
   thumbnail?: string;
-  message?: string;
+  caption?: string;
   retries?: number;
 }
 
@@ -57,7 +57,7 @@ export default class TelegramUploader {
   }
 
   public async uploadVideo(video: SendableVideo, options: UploadVideoOptions): Promise<void> {
-    const { thumbnail, message, retries = 3 } = options;
+    const { thumbnail, caption, retries = 3 } = options;
 
     const attributes = [
       new Api.DocumentAttributeVideo({
@@ -69,18 +69,19 @@ export default class TelegramUploader {
     ];
 
     try {
-      await this.#telegramClient.sendMessage(this.#channel, {
+      await this.#telegramClient.sendFile(this.#channel, {
         file: video.path,
         thumb: thumbnail,
         attributes,
-        message,
-        supportStreaming: true,
+        caption,
+        supportsStreaming: true,
+        workers: 8,
       });
     } catch (error) {
       if (retries > 0) {
         console.error(`Failed to upload video: ${video.path}`);
         console.info(`Retrying... Remaining attempts: ${retries}`);
-        await this.uploadVideo(video, { thumbnail, message, retries: retries - 1 });
+        await this.uploadVideo(video, { thumbnail, caption, retries: retries - 1 });
       } else {
         throw error;
       }
