@@ -1,0 +1,46 @@
+{
+  "name": "video-uploader",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "npm": "please-use-bun",
+    "pnpm": "please-use-bun",
+    "yarn": "please-use-bun"
+  },
+  "scripts": {
+    "start": "bun src/start.ts",
+    "test": "bun lint && bun typecheck && bun format:check",
+    "test:fix": "bun lint:fix && bun format",
+    "format": "prettier . --write --cache",
+    "format:check": "prettier . --check --cache",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix --cache",
+    "typecheck": "tsc",
+    "get-tg-session": "bun scripts/getTelegramSession.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.2",
+    "libsodium": "^0.7.13",
+    "libsodium-wrappers": "^0.7.13",
+    "telegram": "^2.20.2",
+    "youtubei.js": "^9.1.0",
+    "yt-dlp-wrap": "2.3.12"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^4.3.0",
+    "@types/bun": "^1.0.10",
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/libsodium-wrappers": "^0.7.13",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-sonarjs": "^0.24.0",
+    "eslint-plugin-unicorn": "^51.0.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.3"
+  }
+}
