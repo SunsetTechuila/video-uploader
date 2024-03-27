@@ -117,11 +117,8 @@ async function uploadVideo(options: UploadVideoOptions) {
   };
 
   console.info(`Uploading video with resolution ${resolution} to Telegram`);
-  await telegramUploader
-    .uploadVideo(video, { thumbnail, caption: `${videoName} ${resolution}` })
-    .then(() => {
-      console.info(`Video with resolution ${resolution} uploaded to Telegram`);
-    });
+  await telegramUploader.uploadVideo(video, { thumbnail, caption: `${videoName} ${resolution}` });
+  console.info(`Video with resolution ${resolution} uploaded to Telegram`);
 }
 
 async function scaleVideoWithLogs(scaleVideoOptions: ScaleVideoOptions): Promise<void> {
