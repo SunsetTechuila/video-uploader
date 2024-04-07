@@ -1,0 +1,7 @@
+name = "trigger-bot"
+main = "src/start.ts"
+compatibility_date = "2024-04-07"
+
+[vars]
+TARGET_REPOSITORY = "SunsetTechuila/video-uploader"
+WORKFLOW_ID = "upload_video.yml"

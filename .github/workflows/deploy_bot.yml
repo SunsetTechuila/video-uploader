@@ -1,0 +1,33 @@
+name: Deploy Bot
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - packages/trigger-bot/src/**
+      - packages/trigger-bot/wrangler.toml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/trigger-bot
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile --production
+
+      - name: Build & Deploy
+        run: bun run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

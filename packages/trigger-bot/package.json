@@ -1,0 +1,26 @@
+{
+  "name": "trigger-bot",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check-all": "bun lint && bun type-check && bun format:check",
+    "check-all:fix": "bun lint:fix && bun format",
+    "format": "bun format:base --write",
+    "format:check": "bun format:base --check",
+    "format:base": "bun --bun prettier . --cache",
+    "lint": "bun --bun eslint . --cache",
+    "lint:fix": "bun lint --fix",
+    "type-check": "bun --bun tsc"
+  },
+  "dependencies": {
+    "wrangler": "^3.48.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240405.0"
+  }
+}
