@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-named-as-default
+// eslint-disable-next-line import-x/no-named-as-default
 import FfmpegCommand from "fluent-ffmpeg";
 
 export default function getVideoDurationSec(path: string): Promise<number> {

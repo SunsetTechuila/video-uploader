@@ -1,0 +1,32 @@
+{
+  "name": "video-uploader",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun src/start.ts",
+    "check-all": "bun lint && bun type-check && bun format:check",
+    "check-all:fix": "bun lint:fix && bun format",
+    "format": "bun format:base --write",
+    "format:check": "bun format:base --check",
+    "format:base": "bun --bun prettier . --cache",
+    "lint": "bun --bun eslint . --cache",
+    "lint:fix": "bun lint --fix",
+    "type-check": "bun --bun tsc",
+    "get-tg-session": "bun scripts/getTelegramSession.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.1.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "libsodium": "^0.7.13",
+    "libsodium-wrappers": "^0.7.13",
+    "telegram": "^2.20.10",
+    "youtubei.js": "^9.2.0",
+    "yt-dlp-wrap": "2.3.12"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^4.3.2",
+    "@types/bun": "^1.0.12",
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/libsodium-wrappers": "^0.7.14"
+  }
+}

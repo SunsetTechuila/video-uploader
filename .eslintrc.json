@@ -16,7 +16,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
-    "project": "tsconfig.json"
+    "project": "**/tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "sonarjs", "unicorn", "import"],
   "rules": {
@@ -34,7 +34,10 @@
   },
   "settings": {
     "import-x/resolver": {
-      "typescript": true
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "**/tsconfig.json"
+      }
     }
   }
 }

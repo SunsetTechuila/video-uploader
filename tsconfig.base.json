@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
     "module": "ES2022",
-    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "lib": ["ES2023"],
+
     "noEmit": true,
     "esModuleInterop": true,
-    "lib": ["ES2023"],
+    "moduleResolution": "Bundler",
 
     "strict": true,
     "skipLibCheck": true,
@@ -13,14 +14,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-
-    "baseUrl": ".",
-    "paths": {
-      "@app": ["src/app"],
-      "@modules": ["src/app/modules"]
-    }
-  },
-
-  "include": ["src/**/*", "scripts/**/*"]
+    "noUncheckedIndexedAccess": true
+  }
 }
