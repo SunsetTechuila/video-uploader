@@ -19,28 +19,28 @@
     "get-tg-session": "bun scripts/getTelegramSession.ts"
   },
   "dependencies": {
-    "@octokit/rest": "^20.0.2",
+    "@octokit/rest": "^20.1.0",
     "libsodium": "^0.7.13",
     "libsodium-wrappers": "^0.7.13",
-    "telegram": "^2.20.2",
-    "youtubei.js": "^9.1.0",
+    "telegram": "^2.20.10",
+    "youtubei.js": "^9.2.0",
     "yt-dlp-wrap": "2.3.12"
   },
   "devDependencies": {
-    "@inquirer/prompts": "^4.3.0",
+    "@inquirer/prompts": "^4.3.2",
     "@types/bun": "^1.0.10",
     "@types/fluent-ffmpeg": "^2.1.24",
-    "@types/libsodium-wrappers": "^0.7.13",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@types/libsodium-wrappers": "^0.7.14",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import-x": "^0.5.0",
-    "eslint-plugin-sonarjs": "^0.24.0",
-    "eslint-plugin-unicorn": "^51.0.1",
+    "eslint-plugin-sonarjs": "^0.25.1",
+    "eslint-plugin-unicorn": "^52.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   }
 }
