@@ -9,13 +9,14 @@
   },
   "scripts": {
     "start": "bun src/start.ts",
-    "test": "bun lint && bun typecheck && bun format:check",
-    "test:fix": "bun lint:fix && bun format",
-    "format": "prettier . --write --cache",
-    "format:check": "prettier . --check --cache",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --fix --cache",
-    "typecheck": "tsc",
+    "check-all": "bun lint && bun type-check && bun format:check",
+    "check-all:fix": "bun lint:fix && bun format",
+    "format": "bun format:base --write",
+    "format:check": "bun format:base --check",
+    "format:base": "bun --bun prettier . --cache",
+    "lint": "bun --bun eslint . --cache",
+    "lint:fix": "bun lint --fix",
+    "type-check": "bun --bun tsc",
     "get-tg-session": "bun scripts/getTelegramSession.ts"
   },
   "dependencies": {
