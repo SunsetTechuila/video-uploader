@@ -6,6 +6,12 @@ on:
       link:
         description: Link to the video to upload
         required: true
+      uploadToYouTube:
+        description: Upload the video to YouTube? (true/false)
+        default: ""
+      uploadToTelegram:
+        description: Upload the video to Telegram? (true/false)
+        default: ""
 
 jobs:
   upload:
@@ -29,8 +35,8 @@ jobs:
         run: bun start "${{ github.event.inputs.link }}"
         env:
           githubToken: ${{ secrets.SECRETS_ACCESS_TOKEN }}
-          uploadToYouTube: ${{ vars.UPLOAD_TO_YOUTUBE }}
-          uploadToTelegram: ${{ vars.UPLOAD_TO_TELEGRAM }}
+          uploadToYouTube: ${{ github.event.inputs.uploadToYouTube ||  vars.UPLOAD_TO_YOUTUBE }}
+          uploadToTelegram: ${{ github.event.inputs.uploadToTelegram || vars.UPLOAD_TO_TELEGRAM }}
           telegramApiId: ${{ secrets.TELEGRAM_API_ID }}
           telegramApiHash: ${{ secrets.TELEGRAM_API_HASH }}
           telegramSession: ${{ secrets.TELEGRAM_SESSION }}
