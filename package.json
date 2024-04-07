@@ -9,13 +9,14 @@
     "yarn": "please-use-bun"
   },
   "scripts": {
-    "check-all": "bun lint && bun format:check",
+    "check-all": "bun lint && bun type-check && bun format:check",
     "check-all:fix": "bun lint:fix && bun format",
     "format": "bun format:base --write",
     "format:check": "bun format:base --check",
     "format:base": "bun --bun prettier . --cache",
     "lint": "bun --bun eslint . --cache",
-    "lint:fix": "bun lint --fix"
+    "lint:fix": "bun lint --fix",
+    "type-check": "bun --bun tsc --project packages/trigger-bot/tsconfig.json && bun --bun tsc --project packages/video-uploader/tsconfig.json"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.5.0",
