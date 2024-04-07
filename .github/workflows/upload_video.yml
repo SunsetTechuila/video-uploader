@@ -28,7 +28,7 @@ jobs:
       - name: Run uploader
         run: bun start "${{ github.event.inputs.link }}"
         env:
-          githubToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          githubToken: ${{ secrets.SECRETS_ACCESS_TOKEN }}
           uploadToYouTube: ${{ vars.UPLOAD_TO_YOUTUBE }}
           uploadToTelegram: ${{ vars.UPLOAD_TO_TELEGRAM }}
           telegramApiId: ${{ secrets.TELEGRAM_API_ID }}
