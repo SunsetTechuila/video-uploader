@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^20.1.0",
+    "fluent-ffmpeg": "^2.1.2",
     "libsodium": "^0.7.13",
     "libsodium-wrappers": "^0.7.13",
     "telegram": "^2.20.10",
@@ -40,7 +41,6 @@
     "eslint-plugin-import-x": "^0.5.0",
     "eslint-plugin-sonarjs": "^0.25.1",
     "eslint-plugin-unicorn": "^52.0.0",
-    "fluent-ffmpeg": "^2.1.2",
     "prettier": "^3.2.5",
     "typescript": "^5.4.4"
   }
