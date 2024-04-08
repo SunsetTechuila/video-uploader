@@ -2,16 +2,20 @@
 import FfmpegCommand from "fluent-ffmpeg";
 
 export default function getVideoDurationSec(path: string): Promise<number> {
-  return new Promise<number>((resolve) => {
+  return new Promise<number>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .ffprobe((error, data) => {
         if (error) {
-          throw `Cannot get video duration!\n${error}`;
+          reject(`Cannot get video duration!\n${error}`);
+          return;
         }
 
         const duration = data.format.duration;
-        if (!duration) throw new Error("Cannot get video duration!");
+        if (!duration) {
+          reject("Cannot get video duration!");
+          return;
+        }
 
         resolve(duration);
       });

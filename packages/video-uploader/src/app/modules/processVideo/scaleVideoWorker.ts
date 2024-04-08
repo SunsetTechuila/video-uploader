@@ -8,14 +8,14 @@ declare const self: Worker;
 function scaleVideo(scaleVideoArguments: ScaleVideoOptions): Promise<void> {
   const { path, targetResolution, outFile } = scaleVideoArguments;
 
-  return new Promise<void>((resolve) => {
+  return new Promise<void>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .audioCodec("copy")
       .size(targetResolution)
       .autopad()
       .on("error", (error) => {
-        throw new Error(`Cannot convert video!\n${error}`);
+        reject(error);
       })
       .on("end", () => {
         resolve();

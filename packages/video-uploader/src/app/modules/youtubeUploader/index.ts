@@ -48,7 +48,7 @@ export default class YouTubeUploader {
   }
 
   #signIn(credentials?: YouTubeCredentials): Promise<YouTubeCredentials> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.#innertubeClient.session.on("auth", ({ credentials }) => {
         resolve(credentials);
       });
@@ -62,7 +62,7 @@ export default class YouTubeUploader {
       });
 
       this.#innertubeClient.session.on("auth-error", (error) => {
-        throw new Error(`Failed to sign in to YouTube!\n${JSON.stringify(error)}`);
+        reject(`Failed to sign in to YouTube!\n${error.message}`);
       });
 
       void this.#innertubeClient.session.signIn(credentials);

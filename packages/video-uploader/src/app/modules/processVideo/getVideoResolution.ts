@@ -4,19 +4,26 @@ import FfmpegCommand from "fluent-ffmpeg";
 import { VideoResolution } from "./types";
 
 export default function getVideoResolution(path: string): Promise<VideoResolution> {
-  return new Promise<VideoResolution>((resolve) => {
+  return new Promise<VideoResolution>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .ffprobe((error, data) => {
         if (error) {
-          throw `Cannot get video resolution!\n${error}`;
+          reject(`Cannot get video resolution!\n${error}`);
+          return;
         }
 
         const width = data.streams[0]?.coded_width;
         const height = data.streams[0]?.coded_height;
 
-        if (!width) throw new Error("Cannot get video width!");
-        if (!height) throw new Error("Cannot get video height!");
+        if (!width) {
+          reject("Cannot get video width!");
+          return;
+        }
+        if (!height) {
+          reject("Cannot get video height!");
+          return;
+        }
 
         resolve(`${width}x${height}`);
       });
