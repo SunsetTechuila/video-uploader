@@ -17,6 +17,7 @@ export {
 
 export {
   scaleVideo,
+  compressVideo,
   getVideoDurationSec,
   getVideoResolution,
   saveVideoFrame,
