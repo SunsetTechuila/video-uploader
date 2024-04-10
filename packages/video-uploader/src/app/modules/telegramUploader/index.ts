@@ -84,6 +84,7 @@ export default class TelegramUploader {
       if (retries > 0) {
         console.error(`Failed to upload video: ${video.path}`);
         console.info(`Retrying... Remaining attempts: ${retries}`);
+        await Bun.sleep(1000);
         await this.uploadVideo(video, { thumbnail, caption, retries: retries - 1 });
       } else {
         throw error;
