@@ -21,36 +21,39 @@ export interface UploadVideoOptions {
 }
 
 export default class TelegramUploader {
-  readonly #telegramClient;
+  readonly fileSizeLimitMB;
+
+  readonly #client;
 
   readonly #channel;
 
-  private constructor(telegramClient: TelegramClient, channel: string) {
-    this.#telegramClient = telegramClient;
+  private constructor(client: TelegramClient, channel: string, fileSizeLimitMB: number) {
+    this.#client = client;
     this.#channel = channel;
+    this.fileSizeLimitMB = fileSizeLimitMB;
   }
 
   public static async create(
-    telegramCredentials: TelegramCredentials,
+    credentials: TelegramCredentials,
     channel: string,
   ): Promise<TelegramUploader> {
-    const telegramClient = new TelegramUploader(
-      new TelegramClient(
-        new StringSession(telegramCredentials.session),
-        telegramCredentials.apiId,
-        telegramCredentials.apiHash,
-        {},
-      ),
-      channel,
+    const telegramClient = new TelegramClient(
+      new StringSession(credentials.session),
+      credentials.apiId,
+      credentials.apiHash,
+      {},
     );
 
-    await telegramClient.#telegramClient.connect();
+    await telegramClient.connect();
 
-    return telegramClient;
+    const { premium } = await telegramClient.getMe();
+    const fileSizeLimitMB = premium ? 4000 : 2000;
+
+    return new TelegramUploader(telegramClient, channel, fileSizeLimitMB);
   }
 
   public async sendMessage(message: string, shouldShowPreview = false): Promise<void> {
-    await this.#telegramClient.sendMessage(this.#channel, {
+    await this.#client.sendMessage(this.#channel, {
       message,
       linkPreview: shouldShowPreview,
     });
@@ -69,7 +72,7 @@ export default class TelegramUploader {
     ];
 
     try {
-      await this.#telegramClient.sendFile(this.#channel, {
+      await this.#client.sendFile(this.#channel, {
         file: video.path,
         thumb: thumbnail,
         attributes,
@@ -89,6 +92,6 @@ export default class TelegramUploader {
   }
 
   public async disconnect(): Promise<void> {
-    await this.#telegramClient.disconnect();
+    await this.#client.disconnect();
   }
 }
