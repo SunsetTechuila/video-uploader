@@ -20,6 +20,7 @@ export {
   compressVideo,
   getVideoDurationSec,
   getVideoResolution,
+  getVideoSizeMB,
   saveVideoFrame,
   type VideoResolution,
   type ScaleVideoOptions,
