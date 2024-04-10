@@ -11,7 +11,7 @@ export default function getVideoDurationSec(path: string): Promise<number> {
           return;
         }
 
-        const duration = data.format.duration;
+        const { duration } = data.format;
         if (!duration) {
           reject("Cannot get video duration!");
           return;
