@@ -20,7 +20,7 @@ export default class YouTubeUploader {
     this.#innertubeClient = innertubeClient;
   }
 
-  public static async create(
+  static async create(
     credentials?: YouTubeCredentials,
     saveCredentialsCallback?: SaveCredentialsCallback,
   ): Promise<YouTubeUploader> {
@@ -32,7 +32,7 @@ export default class YouTubeUploader {
     return youtubeUploader;
   }
 
-  public async uploadVideo(videoPath: string, options: UploadOptions = {}): Promise<void> {
+  async uploadVideo(videoPath: string, options: UploadOptions = {}): Promise<void> {
     const { privacy = "PRIVATE", title, description } = options;
     const videoFile = Bun.file(videoPath);
 

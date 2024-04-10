@@ -33,7 +33,7 @@ export default class TelegramUploader {
     this.fileSizeLimitMB = fileSizeLimitMB;
   }
 
-  public static async create(
+  static async create(
     credentials: TelegramCredentials,
     channel: string,
   ): Promise<TelegramUploader> {
@@ -52,14 +52,14 @@ export default class TelegramUploader {
     return new TelegramUploader(telegramClient, channel, fileSizeLimitMB);
   }
 
-  public async sendMessage(message: string, shouldShowPreview = false): Promise<void> {
+  async sendMessage(message: string, shouldShowPreview = false): Promise<void> {
     await this.#client.sendMessage(this.#channel, {
       message,
       linkPreview: shouldShowPreview,
     });
   }
 
-  public async uploadVideo(video: SendableVideo, options: UploadVideoOptions): Promise<void> {
+  async uploadVideo(video: SendableVideo, options: UploadVideoOptions): Promise<void> {
     const { thumbnail, caption, retries = 3 } = options;
 
     const attributes = [
@@ -92,7 +92,7 @@ export default class TelegramUploader {
     }
   }
 
-  public async disconnect(): Promise<void> {
+  async disconnect(): Promise<void> {
     await this.#client.disconnect();
   }
 }
