@@ -1,7 +1,7 @@
 // eslint-disable-next-line import-x/no-named-as-default
 import FfmpegCommand from "fluent-ffmpeg";
 
-export default async function saveVideoFrame(
+export default function saveVideoFrame(
   path: string,
   outFile: string,
   time = "00:00:00",
