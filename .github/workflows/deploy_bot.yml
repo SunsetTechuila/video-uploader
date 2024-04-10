@@ -10,8 +10,27 @@ on:
       - packages/trigger-bot/wrangler.toml
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      is_token_set: ${{ steps.check_token.outputs.is_set }}
+    steps:
+      - name: Check if Cloudflare API token is set
+        id: check_token
+        run: |
+          if [[ ${{ env.token }} ]]; then
+            echo "is_set=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_set=false" >> "$GITHUB_OUTPUT"
+            echo "Cloudflare API token is not set. Skipping deployment."
+          fi
+        env:
+          token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
   deploy:
     runs-on: ubuntu-latest
+    needs: check
+    if: ${{ needs.check.outputs.is_token_set == 'true' }}
     defaults:
       run:
         working-directory: packages/trigger-bot
