@@ -3,8 +3,8 @@ import FfmpegCommand from "fluent-ffmpeg";
 
 import { VideoResolution } from "./types";
 
-export default function getVideoResolution(path: string): Promise<VideoResolution> {
-  return new Promise<VideoResolution>((resolve, reject) => {
+export default async function getVideoResolution(path: string): Promise<VideoResolution> {
+  return await new Promise<VideoResolution>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .ffprobe((error, data) => {

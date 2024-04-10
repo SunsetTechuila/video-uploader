@@ -93,6 +93,6 @@ export default class TelegramUploader {
   }
 
   async disconnect(): Promise<void> {
-    await this.#client.disconnect();
+    return await this.#client.disconnect();
   }
 }

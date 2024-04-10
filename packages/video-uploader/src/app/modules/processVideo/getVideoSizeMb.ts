@@ -3,8 +3,8 @@ import FfmpegCommand from "fluent-ffmpeg";
 
 const BYTES_IN_MEGABYTE = 1000 * 1000;
 
-export default function getVideoSizeMB(path: string): Promise<number> {
-  return new Promise<number>((resolve, reject) => {
+export default async function getVideoSizeMB(path: string): Promise<number> {
+  return await new Promise<number>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .ffprobe((error, data) => {

@@ -23,7 +23,7 @@ class TelegramBot {
   }
 
   async send(message: string): Promise<Response> {
-    return fetch(`https://api.telegram.org/bot${this.#token}/sendMessage`, {
+    return await fetch(`https://api.telegram.org/bot${this.#token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: this.#chatId, text: message }),
@@ -41,7 +41,7 @@ export interface TriggerWorkflowOptions {
 async function triggerWorkflow(options: TriggerWorkflowOptions): Promise<Response> {
   const { inputs, actionsAccessToken, targetRepository, workflowId } = options;
 
-  return fetch(
+  return await fetch(
     `https://api.github.com/repos/${targetRepository}/actions/workflows/${workflowId}/dispatches`,
     {
       method: "POST",

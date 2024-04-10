@@ -46,7 +46,7 @@ export default {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const { message } = (await request.json()) as { message: TelegramMessage };
 
-    return main({
+    return await main({
       message,
       telegramBotToken,
       allowedUserIDs,

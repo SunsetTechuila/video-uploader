@@ -3,7 +3,7 @@ import { StringSession } from "telegram/sessions";
 import { input } from "@inquirer/prompts";
 
 async function getInput(message: string): Promise<string> {
-  return input({ message, validate: Boolean });
+  return await input({ message, validate: Boolean });
 }
 
 const apiId = await getInput("Please enter your app API ID: ");
