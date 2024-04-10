@@ -27,7 +27,7 @@ const TARGET_VIDEO_RESOLUTIONS: VideoResolution[] = [
   "640x480",
 ];
 
-export async function uploadToTelegram(options: UploadToTelegramOptions) {
+export async function uploadToTelegram(options: UploadToTelegramOptions): Promise<void> {
   const { videoLink, videoPath, telegramCredentials, telegramChannel } = options;
 
   const currentVideoResolution = await getVideoResolution(videoPath);
@@ -118,7 +118,7 @@ interface UploadVideoOptions {
   videoPath: string;
   telegramUploader: TelegramUploader;
 }
-async function uploadVideo(options: UploadVideoOptions) {
+async function uploadVideo(options: UploadVideoOptions): Promise<void> {
   const { videoName, videoPath, telegramUploader } = options;
 
   const { resolution, height, width, duration } = await getVideoInfo(videoPath);

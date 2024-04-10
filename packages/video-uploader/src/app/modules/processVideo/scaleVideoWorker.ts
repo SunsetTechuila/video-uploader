@@ -5,10 +5,10 @@ import { ScaleVideoOptions } from "./types";
 
 declare const self: Worker;
 
-function scaleVideo(scaleVideoArguments: ScaleVideoOptions): Promise<void> {
+async function scaleVideo(scaleVideoArguments: ScaleVideoOptions): Promise<void> {
   const { path, targetResolution, outFile } = scaleVideoArguments;
 
-  return new Promise<void>((resolve, reject) => {
+  return await new Promise<void>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .audioCodec("copy")

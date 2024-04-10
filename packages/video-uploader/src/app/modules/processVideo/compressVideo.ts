@@ -2,8 +2,10 @@ import path from "node:path";
 
 import { CompressVideoOptions } from "./types";
 
-export default function compressVideo(compressVideoOptions: CompressVideoOptions): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
+export default async function compressVideo(
+  compressVideoOptions: CompressVideoOptions,
+): Promise<void> {
+  return await new Promise<void>((resolve, reject) => {
     const worker = new Worker(path.join(import.meta.dirname, "compressVideoWorker.ts"));
 
     worker.postMessage(compressVideoOptions);

@@ -13,7 +13,7 @@ export interface MainOptions {
   telegramChannel?: string;
 }
 
-export default async function main(options: MainOptions) {
+export default async function main(options: MainOptions): Promise<void> {
   const {
     videoLink,
     shouldUploadToYouTube,

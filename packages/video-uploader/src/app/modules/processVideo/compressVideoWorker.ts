@@ -29,7 +29,7 @@ async function compressVideo(compressVideoArguments: CompressVideoOptions): Prom
       .run();
   });
 
-  return new Promise<void>((resolve, reject) => {
+  return await new Promise<void>((resolve, reject) => {
     baseCommand
       .outputOptions("-pass 2")
       .on("error", (error) => {

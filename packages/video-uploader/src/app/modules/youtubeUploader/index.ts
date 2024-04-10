@@ -67,6 +67,6 @@ export default class YouTubeUploader {
     });
 
     await this.#innertubeClient.session.signIn(credentials);
-    return signInPromise;
+    return await signInPromise;
   }
 }

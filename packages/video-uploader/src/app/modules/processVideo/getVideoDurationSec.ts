@@ -1,8 +1,8 @@
 // eslint-disable-next-line import-x/no-named-as-default
 import FfmpegCommand from "fluent-ffmpeg";
 
-export default function getVideoDurationSec(path: string): Promise<number> {
-  return new Promise<number>((resolve, reject) => {
+export default async function getVideoDurationSec(path: string): Promise<number> {
+  return await new Promise<number>((resolve, reject) => {
     FfmpegCommand()
       .input(path)
       .ffprobe((error, data) => {
