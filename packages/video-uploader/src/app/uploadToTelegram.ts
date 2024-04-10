@@ -3,6 +3,8 @@ import path from "node:path";
 import {
   getVideoResolution,
   getVideoDurationSec,
+  getVideoSizeMB,
+  compressVideo,
   scaleVideo,
   saveVideoFrame,
   ScaleVideoOptions,
@@ -38,17 +40,30 @@ export async function uploadToTelegram(options: UploadToTelegramOptions) {
     TARGET_VIDEO_RESOLUTIONS.indexOf(currentVideoResolution) + 1,
   );
 
-  const { name: videoName } = path.parse(videoPath);
-
   const telegramUploader = await TelegramUploader.create(telegramCredentials, telegramChannel);
+
+  const { name: videoName } = path.parse(videoPath);
   await telegramUploader.sendMessage(`${videoName}\n${videoLink}`);
 
+  const { fileSizeLimitMB } = telegramUploader;
+  const isVideoSizeExceeded = (await getVideoSizeMB(videoPath)) > fileSizeLimitMB;
+  const compressedVideoPath = insertStringToFileName(videoPath, "compressed");
+  const targetVideoPath = isVideoSizeExceeded ? compressedVideoPath : videoPath;
+  if (isVideoSizeExceeded) {
+    console.info("Compressing video");
+    await compressVideo({
+      path: videoPath,
+      targetSizeMB: fileSizeLimitMB,
+      outFile: compressedVideoPath,
+    });
+  }
+
   await scaleVideoAndUpload({
-    videoPath,
+    videoPath: targetVideoPath,
     videoName,
     resolutionsToScaleTo,
     telegramUploader,
-    uploadPromise: uploadVideo({ videoName, videoPath, telegramUploader }),
+    uploadPromise: uploadVideo({ videoName, videoPath: targetVideoPath, telegramUploader }),
   });
 
   console.info("All versions of the video uploaded to Telegram");
@@ -71,7 +86,7 @@ async function scaleVideoAndUpload(options: ScaleVideoAndUploadOptions): Promise
     return;
   }
 
-  const scaledVideoPath = getVideoPathForResolution(videoPath, resolutionToScaleTo);
+  const scaledVideoPath = insertStringToFileName(videoPath, resolutionToScaleTo);
   await scaleVideoWithLogs({
     path: videoPath,
     targetResolution: resolutionToScaleTo,
@@ -142,9 +157,9 @@ async function getVideoInfo(videoPath: string): Promise<VideoInfo> {
   return { resolution, width, height, duration };
 }
 
-function getVideoPathForResolution(videoPath: string, resolution: VideoResolution) {
-  const { dir, name, ext } = path.parse(videoPath);
-  const fileName = `${name} ${resolution}${ext}`;
+function insertStringToFileName(filePath: string, stringToInsert: string) {
+  const { dir, name, ext } = path.parse(filePath);
+  const fileName = `${name} ${stringToInsert}${ext}`;
 
   return path.join(dir, fileName);
 }
