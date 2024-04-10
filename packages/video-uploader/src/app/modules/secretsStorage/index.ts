@@ -1,4 +1,6 @@
-import * as sodium from "libsodium-wrappers";
+/* eslint-disable import-x/no-named-as-default-member */
+/* eslint-disable import-x/default */
+import sodium from "libsodium-wrappers";
 import { Octokit } from "@octokit/rest";
 
 export interface Repository {
@@ -16,7 +18,7 @@ export default class SecretsStorage {
     this.#repository = repository;
   }
 
-  public async set(name: string, value: string): Promise<void> {
+  async set(name: string, value: string): Promise<void> {
     const { data: repoPublicKey } = await this.#octokit.actions.getRepoPublicKey({
       owner: this.#repository.owner,
       repo: this.#repository.name,
