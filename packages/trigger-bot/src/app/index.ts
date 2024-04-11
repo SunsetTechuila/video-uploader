@@ -50,7 +50,7 @@ async function triggerWorkflow(options: TriggerWorkflowOptions): Promise<Respons
         "User-Agent": "trigger-bot",
       },
       body: JSON.stringify({
-        ref: "dev",
+        ref: "master",
         inputs,
       }),
     },
