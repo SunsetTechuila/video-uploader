@@ -24,7 +24,7 @@ const TARGET_VIDEO_RESOLUTIONS: VideoResolution[] = [
   "4096x2160",
   "1920x1080",
   "1280x720",
-  "640x480",
+  "854x480",
 ];
 
 export async function uploadToTelegram(options: UploadToTelegramOptions): Promise<void> {
